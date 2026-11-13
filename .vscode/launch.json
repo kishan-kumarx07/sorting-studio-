@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Smart Sorting Studio",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\build\\smart_sorting_studio.exe",
+      "args": ["8080"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Build Smart Sorting Studio",
+      "externalConsole": false,
+      "serverReadyAction": {
+        "pattern": "Smart Sorting Studio backend running at http://localhost:(\\d+)",
+        "uriFormat": "http://localhost:%s",
+        "action": "openExternally"
+      }
+    }
+  ]
+}

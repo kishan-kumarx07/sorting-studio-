@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Sorting Studio</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="bg-orb bg-orb-one"></div>
+  <div class="bg-orb bg-orb-two"></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">SS</div>
+        <div>
+          <h1>Smart Sorting Studio</h1>
+          <p>Learn. compare. visualize sorting algorithms in motion.</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="ghost-btn" id="themeToggle">Toggle theme</button>
+        <span class="status-pill" id="backendStatus">Connecting to backend...</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section id="homeScreen" class="screen screen-active">
+        <div class="hero-card card-glow">
+          <div class="hero-copy">
+            <p class="eyebrow">Sorting studio</p>
+            <h2>Visualize algorithms as a clean, interactive experience.</h2>
+            <p>
+              Choose a learning path for one algorithm or compare two algorithms side by side
+              with live traces, performance metrics, and a modern bar-graph visualizer.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-btn" id="goLearn">Learn an Algorithm</button>
+              <button class="secondary-btn" id="goCompare">Compare Algorithms</button>
+            </div>
+          </div>
+          <div class="hero-preview">
+            <div class="mini-graph" aria-hidden="true">
+              <span style="height: 35%"></span>
+              <span style="height: 68%"></span>
+              <span style="height: 52%"></span>
+              <span style="height: 84%"></span>
+              <span style="height: 45%"></span>
+              <span style="height: 75%"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <p class="feature-tag">Mode 1</p>
+            <h3>Learn an Algorithm</h3>
+            <p>Pick one algorithm and see pseudocode, beginner-friendly explanations, complexity, and a live sorting animation.</p>
+          </article>
+          <article class="feature-card">
+            <p class="feature-tag">Mode 2</p>
+            <h3>Compare Algorithms</h3>
+            <p>Run two algorithms against the same dataset and compare time, comparisons, swaps, and trace behavior.</p>
+          </article>
+          <article class="feature-card">
+            <p class="feature-tag">Data Tools</p>
+            <h3>Random, CSV, or Manual Input</h3>
+            <p>Generate new arrays, paste your own values, or load a CSV file to test realistic datasets.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="learnScreen" class="screen">
+        <div class="screen-header">
+          <div>
+            <p class="eyebrow">Mode 1</p>
+            <h2>Learn an Algorithm</h2>
+          </div>
+          <button class="ghost-btn" id="backFromLearn">Back home</button>
+        </div>
+
+        <div class="toolbar card">
+          <div class="control-group">
+            <label for="learnAlgorithm">Algorithm</label>
+            <select id="learnAlgorithm"></select>
+          </div>
+          <div class="control-group">
+            <label for="learnSize">Dataset size</label>
+            <input id="learnSize" type="range" min="8" max="28" value="14" />
+            <span class="control-value" id="learnSizeValue">14</span>
+          </div>
+          <div class="control-group">
+            <label for="speedControl">Speed</label>
+            <input id="speedControl" type="range" min="1" max="3" value="2" />
+            <span class="control-value" id="speedLabel">Medium</span>
+          </div>
+          <div class="toolbar-buttons">
+            <button class="secondary-btn" id="learnGenerate">Generate dataset</button>
+            <button class="primary-btn" id="learnRun">Run visualizer</button>
+            <button class="ghost-btn" id="learnPause">Pause</button>
+          </div>
+        </div>
+
+        <div class="learning-layout">
+          <div class="left-column">
+            <section class="card panel">
+              <div class="panel-title-row">
+                <h3>Pseudocode</h3>
+                <span class="status-pill" id="learnStableBadge">Stable</span>
+              </div>
+              <pre class="code-block" id="learnPseudocode"></pre>
+            </section>
+
+            <section class="card panel">
+              <h3>C++ Code</h3>
+              <pre class="code-block code-scroll" id="learnCode"></pre>
+            </section>
+          </div>
+
+          <div class="right-column">
+            <section class="card panel">
+              <div class="panel-title-row">
+                <h3>Explanation</h3>
+                <span class="accent-pill" id="learnComplexityBadge"></span>
+              </div>
+              <p id="learnExplanation" class="story-text"></p>
+            </section>
+
+            <section class="card panel">
+              <h3>Complexity Table</h3>
+              <div class="table-wrap">
+                <table class="complexity-table">
+                  <thead>
+                    <tr>
+                      <th>Best</th>
+                      <th>Average</th>
+                      <th>Worst</th>
+                      <th>Space</th>
+                      <th>Stability</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="learnComplexityRow"></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <section class="card panel visual-panel">
+          <div class="panel-title-row">
+            <h3>Visual Animation</h3>
+            <div class="inline-controls">
+              <button class="ghost-btn" id="learnStepBack">Step back</button>
+              <button class="ghost-btn" id="learnStepForward">Step forward</button>
+              <button class="ghost-btn" id="learnRestart">Restart</button>
+            </div>
+          </div>
+          <div class="chart-shell">
+            <div class="chart-label-row">
+              <span id="learnDatasetLabel">Dataset</span>
+              <span id="learnStepLabel">Idle</span>
+            </div>
+            <div class="bar-chart" id="learnChart"></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="compareScreen" class="screen">
+        <div class="screen-header">
+          <div>
+            <p class="eyebrow">Mode 2</p>
+            <h2>Compare Algorithms</h2>
+          </div>
+          <button class="ghost-btn" id="backFromCompare">Back home</button>
+        </div>
+
+        <div class="toolbar card compare-toolbar">
+          <div class="control-group">
+            <label for="compareAlgorithmA">Algorithm 1</label>
+            <select id="compareAlgorithmA"></select>
+          </div>
+          <div class="control-group">
+            <label for="compareAlgorithmB">Algorithm 2</label>
+            <select id="compareAlgorithmB"></select>
+          </div>
+          <div class="control-group grow">
+            <label for="manualDataset">Dataset input</label>
+            <textarea id="manualDataset" placeholder="Paste numbers separated by commas or spaces"></textarea>
+          </div>
+          <div class="control-group">
+            <label for="compareSize">Random size</label>
+            <input id="compareSize" type="range" min="8" max="40" value="20" />
+            <span class="control-value" id="compareSizeValue">20</span>
+          </div>
+          <div class="toolbar-buttons wide-actions">
+            <button class="secondary-btn" id="loadSampleDataset">Load sample CSV</button>
+            <label class="file-button">
+              <input type="file" id="csvInput" accept=".csv,.txt" />
+              Upload CSV
+            </label>
+            <button class="ghost-btn" id="generateComparison">Random dataset</button>
+            <button class="primary-btn" id="runComparison">Run comparison</button>
+            <button class="ghost-btn" id="comparePause">Pause</button>
+          </div>
+        </div>
+
+        <section class="card panel">
+          <div class="panel-title-row">
+            <h3>Comparison Result</h3>
+            <span class="accent-pill" id="compareSummary">Awaiting run</span>
+          </div>
+          <div class="comparison-grid">
+            <div class="comparison-pane">
+              <div class="pane-header">
+                <h4 id="algoAName">Algorithm 1</h4>
+                <div class="metric-row" id="algoAMetrics"></div>
+              </div>
+              <div class="chart-shell">
+                <div class="chart-label-row">
+                  <span id="algoALabel">Left side</span>
+                  <span id="algoAStepLabel">Idle</span>
+                </div>
+                <div class="bar-chart comparison-chart" id="algoAChart"></div>
+              </div>
+            </div>
+            <div class="comparison-pane">
+              <div class="pane-header">
+                <h4 id="algoBName">Algorithm 2</h4>
+                <div class="metric-row" id="algoBMetrics"></div>
+              </div>
+              <div class="chart-shell">
+                <div class="chart-label-row">
+                  <span id="algoBLabel">Right side</span>
+                  <span id="algoBStepLabel">Idle</span>
+                </div>
+                <div class="bar-chart comparison-chart" id="algoBChart"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="barTemplate">
+    <div class="bar-slot">
+      <div class="bar"></div>
+      <span class="bar-value"></span>
+    </div>
+  </template>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

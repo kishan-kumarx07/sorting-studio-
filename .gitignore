@@ -1,0 +1,67 @@
+# CMake build output
+/build/
+/cmake-build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/build.ninja
+/Makefile
+/compile_commands.json
+
+# Compiled artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.a
+*.lib
+*.pdb
+*.ilk
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.crt
+*.cer
+*.p8
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+credentials.json
+secrets.json
+
+# Local data, logs, and temporary files
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.log.*
+*.tmp
+*.temp
+*.bak
+
+# Dependency, cache, and build directories
+node_modules/
+dist/
+.next/
+.cache/
+coverage/
+out/
+
+# IDE and operating-system files
+.vs/
+.idea/
+.vscode/*.local.json
+CMakeUserPresets.json
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
